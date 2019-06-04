@@ -1,15 +1,12 @@
 # ELK
 > 找了不少使用 docker-elk 搭建的博客, 英文的阅读吃力不说, 镜像源也是慢的让人头皮发麻, 因此重新编排了一个`docker-compose`,源都是从 https://hub.docker.com/ 上找的, 即使拉的国内镜像源应该也能很好的支持了吧?
 
-### 环境
-* Docker          `18.06.0-ce`
-* docker-compose  `1.22.0`
-给每个容器最少分配 1G 的内存
 
 ### 软件版本
-* logstash:         `5.*`
-* elasticsearch:    `5.*`
-* kibana:           `5.*`
+* logstash:         `5.5.1`
+* elasticsearch:    `5.5.1`
+* kibana:           `5.5.1`
+* elasticsearch-head  `mobz/elasticsearch-head:5`
 
 ### 启动前的配置
 在各个目录下都有对应的 config 配置, 根据各自的情况自行处理
@@ -54,7 +51,7 @@ output {
 ### 启动容器
 执行
 ```
-git clone https://github.com/gaopengfei123123/docker-elk.git && cd docker-elk
+git clone https://github.com/kongyibjcn/docker-elk.git && cd docker-elk
 docker-compose up -d --build
 ```
 等一会看到执行成功的提示
@@ -62,6 +59,7 @@ docker-compose up -d --build
 Creating docker-elk_elasticsearch_1 ... done
 Creating docker-elk_logstash_1      ... done
 Creating docker-elk_kibana_1        ... done
+Creating els-head_1                 ... done
 ```
 
 在本地浏览器输入 `http://localhost:5601/` 进入 kibana 界面
@@ -82,9 +80,3 @@ docker-compose stop
 docker-compose logs -f
 ```
 查看各容器日志输出
-
-
-### TODO
-
-* 引入 kafka 做缓冲 
-* 搭建 es 集群
